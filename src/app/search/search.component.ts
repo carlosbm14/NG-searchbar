@@ -8,11 +8,18 @@ import { Person, SearchService } from '../shared';
 })
 export class SearchComponent implements OnInit {
   query: string | undefined;
-  searchResults: any;
+  searchResults: Person[] = [];
 
-  constructor() {}
+  constructor(private searchService: SearchService) {}
 
   ngOnInit(): void {}
 
-  search() {}
+  search(): void {
+    this.searchService.getAll().subscribe({
+      next: (data: Person[]) => {
+        this.searchResults = data;
+      },
+      error: (e) => console.log(e),
+    });
+  }
 }

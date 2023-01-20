@@ -8,4 +8,23 @@
   />
   <button type="button" (click)="search()">Search</button>
 </form>
-<pre>{{ searchResults | json }}</pre>
+<table *ngIf="searchResults?.length">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Address</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let person of searchResults; let i = index">
+      <td>{{ person.name }}</td>
+      <td>{{ person.phone }}</td>
+      <td>
+        {{ person.address.street }} <br />
+        {{ person.address.city }}, {{ person.address.state }}
+        {{ person.address.zip }}
+      </td>
+    </tr>
+  </tbody>
+</table>
